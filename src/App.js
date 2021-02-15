@@ -1,23 +1,41 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
 
 function App() {
+const [color, setColor] = useState('red');
+
+const [disabled, setDisabled] = useState(false);
+
+const toggleColor = () => {
+  if (color === 'red') {
+    setColor('blue');
+  } else {
+    setColor('red');
+  }
+}
+
+
+let buttonText;
+if (color === 'red') {
+  buttonText = 'Change to blue';
+} else {
+  buttonText = 'Change to red';
+}
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+      <button 
+        className="button"
+        style={{backgroundColor : color}} 
+        onClick={toggleColor}
+        disabled={disabled}
+      >
+        {buttonText}
+      </button>
+      <input 
+        onChange= {(e) => setDisabled(e.target.checked)}
+        type="checkbox"
+        />
     </div>
   );
 }
