@@ -1,5 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import App from './App';
+import  App from './App';
+
+import { replaceCamelWithSapces } from './App';
 
 test('button has correct initial color', () => {
   render(<App />);
@@ -100,4 +102,20 @@ test('blue button greys out when checkbox clicked and becomes red again on secon
   expect(colorButton).toHaveStyle({backgroundColor : 'blue'});
 
 
+});
+
+
+describe('spaces before camel-case capital letters', () => {
+  test('Works for no inner capital letters' , () => {
+    expect(replaceCamelWithSapces('Red')).toBe('Red');
+
+  });
+  test('Works for one inner capital letter' , () => {
+    expect(replaceCamelWithSapces('RedBlue')).toBe('Red Blue');
+    
+  })
+  test('Works for multiple capital letters' , () => {
+    
+    expect(replaceCamelWithSapces('RedBlueGreen')).toBe('Red Blue Green');
+  })
 });
