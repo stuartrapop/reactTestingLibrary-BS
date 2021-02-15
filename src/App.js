@@ -6,6 +6,9 @@ const [color, setColor] = useState('red');
 
 const [disabled, setDisabled] = useState(false);
 
+const nextColor = (color === 'red') ? 'blue' : 'red';
+
+
 const toggleColor = () => {
   if (color === 'red') {
     setColor('blue');
@@ -15,27 +18,27 @@ const toggleColor = () => {
 }
 
 
-let buttonText;
-if (color === 'red') {
-  buttonText = 'Change to blue';
-} else {
-  buttonText = 'Change to red';
-}
+
 
   return (
     <div >
       <button 
         className="button"
-        style={{backgroundColor : color}} 
+        style={{backgroundColor : disabled ? 'grey' : color}} 
         onClick={toggleColor}
         disabled={disabled}
       >
-        {buttonText}
+        Change to {nextColor}
       </button>
       <input 
-        onChange= {(e) => setDisabled(e.target.checked)}
         type="checkbox"
-        />
+        id="disable-button-checkbox"
+        defaultChecked={disabled}
+        aria-checked={disabled}
+        onChange= {(e) => setDisabled(e.target.checked)}/>
+      <label htmlFor="disable-button-checkbox" >Disable button</label>
+        
+        
     </div>
   );
 }
